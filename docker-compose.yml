@@ -36,7 +36,6 @@ services:
     depends_on:
       bkk-db:
         condition: service_healthy
-    command: ["python", "seed.py"]
 
 
   bkk-db-pgadmin:

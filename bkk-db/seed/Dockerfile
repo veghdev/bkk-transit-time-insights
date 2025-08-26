@@ -5,6 +5,6 @@ WORKDIR /app
 COPY requirements.txt .
 RUN pip install --no-cache-dir -r requirements.txt
 
-COPY seed.py .
+COPY src/ .
 
-CMD ["python", "seed.py"]
+CMD ["python", "main.py"]

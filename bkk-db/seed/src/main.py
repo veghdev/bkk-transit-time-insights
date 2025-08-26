@@ -1,7 +1,6 @@
 import os
 import random
 import psycopg2
-from psycopg2.extensions import cursor as Psycopg2Cursor
 from datetime import datetime, timezone, timedelta
 from typing import List, Dict
 
