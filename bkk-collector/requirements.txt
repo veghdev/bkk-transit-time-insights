@@ -1,0 +1,4 @@
+apscheduler
+gtfs-realtime-bindings
+psycopg2-binary
+requests
