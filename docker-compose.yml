@@ -1,0 +1,65 @@
+services:
+  bkk-db:
+    build: ./bkk-db/postgres
+    container_name: bkk-db
+    env_file: .env
+    environment:
+      - POSTGRES_USER
+      - POSTGRES_PASSWORD
+      - POSTGRES_DB
+      - POSTGRES_PORT
+    ports:
+      - "5432:5432"
+    networks:
+      - bkk-net
+    volumes:
+      - bkk-data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER} -d ${POSTGRES_DB}"]
+      interval: 5s
+      timeout: 3s
+      retries: 10
+
+  bkk-db-seed:
+    build: ./bkk-db/seed
+    container_name: bkk-db-seed
+    profiles: ["seed"]
+    env_file: .env
+    environment:
+      - POSTGRES_USER
+      - POSTGRES_PASSWORD
+      - POSTGRES_DB
+      - POSTGRES_PORT
+      - POSTGRES_HOST=bkk-db
+    networks:
+      - bkk-net
+    depends_on:
+      bkk-db:
+        condition: service_healthy
+    command: ["python", "seed.py"]
+
+
+  bkk-db-pgadmin:
+    build: ./bkk-db/pgadmin
+    container_name: bkk-db-pgadmin
+    profiles: ["view"]
+    env_file: .env
+    environment:
+      - PGADMIN_DEFAULT_EMAIL
+      - PGADMIN_DEFAULT_PASSWORD
+      - PGADMIN_PORT
+      - TZ
+    ports:
+      - "${PGADMIN_PORT}:80"
+    networks:
+      - bkk-net
+    depends_on:
+      bkk-db:
+        condition: service_healthy
+
+volumes:
+  bkk-data:
+
+networks:
+  bkk-net:
+    driver: bridge
