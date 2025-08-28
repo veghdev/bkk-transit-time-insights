@@ -41,6 +41,24 @@ services:
       bkk-db:
         condition: service_healthy
 
+  api:
+    build: ./api
+    container_name: api
+    env_file: .env
+    environment:
+      - POSTGRES_USER
+      - POSTGRES_PASSWORD
+      - POSTGRES_DB
+      - POSTGRES_PORT
+      - POSTGRES_HOST=bkk-db
+    ports:
+      - "8000:8000"
+    networks:
+      - bkk-net
+    depends_on:
+      bkk-db:
+        condition: service_healthy
+
   bkk-db-seed:
     build: ./bkk-db/seed
     container_name: bkk-db-seed
