@@ -59,6 +59,18 @@ services:
       bkk-db:
         condition: service_healthy
 
+  dashboard:
+    build: ./dashboard
+    container_name: dashboard
+    ports:
+      - "3000:3000"
+    environment:
+      - API_BASE_URL=http://api:8000/api/trips
+    networks:
+      - bkk-net
+    depends_on:
+      - api
+
   bkk-db-seed:
     build: ./bkk-db/seed
     container_name: bkk-db-seed

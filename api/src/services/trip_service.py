@@ -7,7 +7,7 @@ from repositories.trip_repository import TripRepository
 from config import Config
 
 class TripService:
-    PERIODS_ORDER = ["before_morning_peak", "morning_peak", "daytime", "afternoon_peak", "evening"]
+    PERIODS_ORDER = ["morning", "peak (morning)", "daytime", "peak (afternoon)", "afternoon"]
 
     def __init__(self, repo: TripRepository | None = None, config: Config | None = None):
         self.config = config or Config()
@@ -78,12 +78,12 @@ class TripService:
 
     def _classify_period(self, t: time) -> str:
         if t < time(7, 0):
-            return "before_morning_peak"
+            return "morning"
         elif t < time(10, 0):
-            return "morning_peak"
+            return "peak (morning)"
         elif t < time(15, 0):
             return "daytime"
         elif t < time(18, 0):
-            return "afternoon_peak"
+            return "peak (afternoon)"
         else:
-            return "evening"
+            return "afternoon"
