@@ -34,7 +34,7 @@ services:
       - BKK_API_KEY
       - BKK_API_URL=https://go.bkk.hu/api/query/v1/ws/gtfs-rt/full/TripUpdates.pb
       - ROUTE_ID=0050,0070,0090
-      - TZ
+      - TZ=Europe/Budapest
     networks:
       - bkk-net
     depends_on:
@@ -98,7 +98,7 @@ services:
       - PGADMIN_DEFAULT_EMAIL
       - PGADMIN_DEFAULT_PASSWORD
       - PGADMIN_PORT
-      - TZ
+      - TZ=Europe/Budapest
     ports:
       - "${PGADMIN_PORT}:80"
     networks:
