@@ -118,6 +118,8 @@ For local testing with demo data:
 docker compose --profile seed up --build
 ```
 This starts the database, API, dashboard, and seeds the database with randomized trip data for the demo routes.
+⚠️ Important Note:
+The seed job can take some time to complete. To monitor its progress, check the Docker Compose output.
 
 For live data collection (requires a valid BKK_API_KEY):
 ```bash
