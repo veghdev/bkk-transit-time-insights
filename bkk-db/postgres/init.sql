@@ -7,5 +7,7 @@ CREATE TABLE IF NOT EXISTS trips (
     collected_at TIMESTAMPTZ NOT NULL DEFAULT NOW()
 );
 
+CREATE INDEX IF NOT EXISTS idx_trips_route_id
+ON trips (route_id);
 CREATE INDEX IF NOT EXISTS idx_trips_route_trip_latest
 ON trips (route_id, trip_id, collected_at DESC);
