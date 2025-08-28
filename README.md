@@ -131,3 +131,5 @@ Notes:
 - Database data is persisted in the bkk-data volume.
 - The dashboard relies on internet access to load vizzu-lib from a CDN for chart rendering.
 - **Default Service Ports:**: API: 8000, Dashboard: 3000
+
+![Dashboard Screenshot](./dashboard.png)
